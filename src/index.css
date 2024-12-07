@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --app-height: 100vh;
+  }
+
+  html.force-horizontal {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body.force-horizontal-active {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+
+@layer components {
+  .game-container {
+    @apply w-full max-w-6xl mx-auto;
+  }
+
+  .game-container.force-horizontal {
+    @apply max-w-none px-4;
+  }
+
+  .game-layout {
+    @apply flex flex-col lg:flex-row gap-6;
+  }
+
+  .game-layout.force-horizontal {
+    @apply flex-row min-h-[calc(100vh-4rem)];
+  }
+
+  .game-section {
+    @apply lg:w-1/2 space-y-6;
+  }
+
+  .game-section.force-horizontal {
+    @apply w-1/2;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .force-horizontal .game-layout {
+    @apply flex-row;
+  }
+  
+  .force-horizontal .game-section {
+    @apply w-1/2 px-2;
+  }
+
+  .force-horizontal .game-container {
+    @apply min-h-screen overflow-y-auto pb-8;
+  }
+
+  .force-horizontal-active {
+    @apply overflow-y-auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --app-height: calc(var(--vh, 1vh) * 100);
+  }
+
+  .game-layout:not(.force-horizontal) {
+    @apply flex-col;
+  }
+
+  .game-section:not(.force-horizontal) {
+    @apply w-full;
+  }
+}
